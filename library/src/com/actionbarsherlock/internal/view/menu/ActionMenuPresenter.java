@@ -20,6 +20,7 @@ import static com.actionbarsherlock.internal.ResourcesCompat.getResources_getInt
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -43,6 +44,7 @@ import com.actionbarsherlock.view.MenuItem;
 /**
  * MenuPresenter for building action menus as seen in the action bar and action modes.
  */
+@SuppressLint("NewApi")
 public class ActionMenuPresenter extends BaseMenuPresenter
         implements ActionProvider.SubUiVisibilityListener {
     //UNUSED private static final String TAG = "ActionMenuPresenter";
@@ -117,12 +119,16 @@ public class ActionMenuPresenter extends BaseMenuPresenter
         mScrapActionButtonView = null;
     }
 
+    // http://stackoverflow.com/questions/13179620/force-overflow-menu-in-actionbarsherlock
     public static boolean reserveOverflow(Context context) {
+    	/*
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            return (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB);
+            return true;
         } else {
             return !HasPermanentMenuKey.get(context);
         }
+        */
+    	return true;
     }
 
     private static class HasPermanentMenuKey {
